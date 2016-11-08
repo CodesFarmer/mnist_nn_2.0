@@ -17,20 +17,27 @@ nnclf = nnetwork.Network([784, 30, 10])
 #print nnclf.weights
 print "Training the network......"
 
-nnclf.reset()
+#"""
+nnclf.reset_qinit()
+nnclf.TrainNet(tr_d_1,va_d,200, 0.5, "SGD", "DP")
+
+nnclf.reset_qinit()
 nnclf.TrainNet(tr_d_1,va_d,200, 0.5, "SGD")
 
-nnclf.reset()
+nnclf.reset_qinit()
 nnclf.TrainNet(tr_d_1,va_d,200, 0.5, "SGD", "L1", "-l 0.1")
 
-nnclf.reset()
+nnclf.reset_qinit()
 nnclf.TrainNet(tr_d_1,va_d,200, 0.5, "SGD", "L2", "-l 0.1")
 
-nnclf.reset()
+nnclf.reset_qinit()
 nnclf.TrainNet(tr_d_1,va_d,200, 0.5, "SGD", "DPL2", "-l 0.1")
+#"""
 
+"""
 print "Size:", len(tr_d_1)
 nnclf.plotimg(tr_d,30, 0.15, te_d)
 
 print "Evaluating on test data......"
 print "{0}/{1} on test data !".format(nnclf.Evaluate(va_d), len(va_d))
+"""

@@ -19,6 +19,9 @@ class Network(object):
     def reset(self):
         self.biases = [np.random.randn(y, 1) for y in self.sizes[1:]]
         self.weights = [np.random.randn(x,y) for x,y in zip(self.sizes[1:], self.sizes[:-1])]
+    def reset_qinit(self):
+        self.biases = [np.random.randn(y, 1) for y in self.sizes[1:]]
+        self.weights = [np.random.randn(x,y)/np.sqrt(y) for x,y in zip(self.sizes[1:], self.sizes[:-1])]
     def TrainNet(self,tr_d,va_d,epochs,lr,mode, relz="", parameters=""):
         """
         :param tr_d: training data
@@ -78,7 +81,7 @@ class Network(object):
             else:
                 print "Epoch {0}:".format(j)
             j += 1
-        np.save("test_acy_%s.npy"%(relz), accuracy)
+        np.save("test_acy_%s_qinit.npy"%(relz), accuracy)
 
     def update_network(self, tr_d, lr, relz="", lmbda=0.0):
         """
